@@ -1,0 +1,52 @@
+{
+ "002": {
+  "position": 1.976242,
+  "duration": 1735.587833,
+  "status": "done",
+  "finished": true,
+  "page": 114,
+  "updatedAt": "2026-08-29 01:50:41"
+ },
+ "001": {
+  "position": 27.923977,
+  "duration": 3696.099833,
+  "status": "done",
+  "page": 55,
+  "updatedAt": "2026-08-29 01:46:54"
+ },
+ "003": {
+  "position": 0.0,
+  "duration": 1908.3025,
+  "status": "done",
+  "page": 108,
+  "updatedAt": "2026-08-29 01:28:59"
+ },
+ "006": {
+  "position": 0.776633,
+  "duration": 1604.473167,
+  "status": "done",
+  "page": 38,
+  "updatedAt": "2026-08-29 00:32:55"
+ },
+ "008": {
+  "position": 5.237373616667128,
+  "duration": 663.84,
+  "status": "learning",
+  "page": 272,
+  "updatedAt": "2026-08-28 18:28:24"
+ },
+ "004": {
+  "position": 65.920113,
+  "duration": 1351.6305,
+  "status": "learning",
+  "page": 16,
+  "updatedAt": "2026-08-29 01:47:09"
+ },
+ "034": {
+  "position": 38.002207,
+  "duration": 237.2625,
+  "status": "done",
+  "page": 326,
+  "updatedAt": "2026-08-29 01:49:00"
+ }
+}

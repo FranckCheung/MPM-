@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>软考·系统集成项目管理工程师 · 学习系统·By Franck</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="stylesheet" href="styles.css?v=20260829b">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">集</span>
+    <div>
+      <h1>软考·系统集成项目管理工程师 · 学习系统·By Franck</h1>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="stDone">0</b><span>已完成</span></div>
+    <div class="stat"><b id="stDoing">0</b><span>学习中</span></div>
+    <div class="stat"><b id="stTodo">0</b><span>待开始</span></div>
+    <div class="stat"><b id="stTotal">0</b><span>总课程</span></div>
+  </div>
+  <button id="themeBtn" class="ghost-btn" title="切换主题">◐ 主题</button>
+</header>
+
+<main class="layout" id="layout">
+
+  <!-- ============ 左：课程清单 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="side-head">
+      <input id="search" type="search" placeholder="搜索课程名称…" autocomplete="off">
+      <div class="filters" id="filters">
+        <button data-f="all" class="on">全部</button>
+        <button data-f="todo">待开始</button>
+        <button data-f="learning">学习中</button>
+        <button data-f="done">已完成</button>
+      </div>
+    </div>
+    <div class="course-list" id="courseList">
+      <div class="loading">正在加载课程索引…</div>
+    </div>
+    <div class="side-foot">
+      <button id="expandAll" class="ghost-btn">展开全部</button>
+      <button id="collapseAll" class="ghost-btn">收起全部</button>
+    </div>
+  </aside>
+
+  <!-- ============ 中：视频 + 字幕 ============ -->
+  <section class="stage">
+    <div class="video-head">
+      <div class="vh-title">
+        <span class="badge-no" id="curNo">--</span>
+        <h2 id="curTitle">请从左侧选择课程</h2>
+      </div>
+      <div class="vh-actions">
+        <button id="prevBtn" class="ghost-btn" title="上一节">⏮ 上一节</button>
+        <button id="nextBtn" class="ghost-btn" title="下一节">下一节 ⏭</button>
+        <button id="markBtn" class="primary-btn" title="标记完成 / 取消">✓ 标记完成</button>
+      </div>
+    </div>
+
+    <div class="player-wrap">
+      <video id="video" controls preload="none" playsinline></video>
+      <div class="empty-mask" id="emptyMask">
+        <div>
+          <div class="em-icon">▶</div>
+          <p>从左侧清单选择一节课程开始学习</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="player-bar">
+      <label class="rate">倍速
+        <select id="rate">
+          <option value="0.75">0.75x</option>
+          <option value="1" selected>1.0x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2.0x</option>
+        </select>
+      </label>
+      <label class="chk"><input type="checkbox" id="autoNext" checked> 播完自动下一节</label>
+      <span class="resume-tip" id="resumeTip"></span>
+      <span class="spacer"></span>
+      <span class="hint">快捷键：空格 播放/暂停 · ←→ 快退/快进 5 秒 · ↑↓ 音量 · J/K/L 变速跳转</span>
+    </div>
+
+    <div class="subtitle-panel">
+      <div class="sub-head">
+        <h3>同步字幕</h3>
+        <div class="sub-tools">
+          <label class="chk"><input type="checkbox" id="subFollow" checked> 自动滚动</label>
+          <label class="chk"><input type="checkbox" id="subClickSeek" checked> 点击跳转</label>
+          字号
+          <button id="fontDown" class="mini">A-</button>
+          <button id="fontUp" class="mini">A+</button>
+          <span class="sub-count" id="subCount"></span>
+        </div>
+      </div>
+      <div class="sub-body" id="subBody">
+        <div class="sub-empty">暂无字幕</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 右：悬浮功能按钮 ============ -->
+  <nav class="rail" id="rail">
+    <button class="rail-btn" data-panel="book" title="教材扫描件">
+      <span class="ri">📖</span><span class="rt">课本</span>
+    </button>
+    <button class="rail-btn" data-panel="note" title="教材页码笔记">
+      <span class="ri">📝</span><span class="rt">笔记</span>
+    </button>
+    <button class="rail-btn" data-panel="kp" title="本节知识点总结">
+      <span class="ri">💡</span><span class="rt">知识点</span>
+    </button>
+    <button class="rail-btn collapse-drawer" data-panel="close" title="收起面板">
+      <span class="ri">✕</span><span class="rt">收起</span>
+    </button>
+  </nav>
+
+  <!-- ============ 右侧抽屉面板 ============ -->
+  <aside class="drawer" id="drawer">
+    <div class="drawer-tabs">
+      <button data-t="book" class="on">课本扫描件</button>
+      <button data-t="note">页码笔记</button>
+      <button data-t="kp">知识点总结</button>
+      <button class="drawer-close" id="drawerClose">✕</button>
+    </div>
+
+    <!-- 课本 -->
+    <div class="panel hidden" data-p="book">
+      <div class="page-bar">
+        <button id="bookPrev" class="ghost-btn">‹ 上一页</button>
+        <span class="page-input">
+          <input id="bookPage" type="number" min="1" value="1"> / <b id="bookTotal">-</b>
+        </span>
+        <button id="bookNext" class="ghost-btn">下一页 ›</button>
+        <span class="spacer"></span>
+        <button id="bookZoomOut" class="mini">－</button>
+        <span id="bookZoomTxt">100%</span>
+        <button id="bookZoomIn" class="mini">＋</button>
+        <button id="bookFit" class="mini">适应</button>
+      </div>
+      <div class="book-view" id="bookView">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+
+    <!-- 笔记 -->
+    <div class="panel hidden" data-p="note">
+      <div class="page-bar">
+        <button id="notePrev" class="ghost-btn">‹ 上一页</button>
+        <span class="page-input">
+          <input id="notePage" type="number" min="1" value="1"> / <b id="noteTotal">-</b>
+        </span>
+        <button id="noteNext" class="ghost-btn">下一页 ›</button>
+        <span class="spacer"></span>
+        <label class="chk"><input type="checkbox" id="syncPage" checked> 与课本同步</label>
+      </div>
+      <div class="note-search">
+        <input id="noteSearch" type="search" placeholder="在全书 616 页中搜索关键词…">
+        <button id="noteLocate" class="ghost-btn" title="按当前课程标题自动定位页码">⌖ 自动定位</button>
+      </div>
+      <div class="search-results hidden" id="searchResults"></div>
+      <div class="note-view md" id="noteView">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+
+    <!-- 知识点 -->
+    <div class="panel hidden" data-p="kp">
+      <div class="kp-head">
+        <span id="kpTitle">本节知识点</span>
+        <button id="kpReload" class="mini">↻</button>
+      </div>
+      <div class="kp-view md" id="kpView">
+        <div class="loading">请选择课程后查看知识点</div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="lib/md.js?v=20260829b"></script>
+<script src="app.js?v=20260829b"></script>
+</body>
+</html>
