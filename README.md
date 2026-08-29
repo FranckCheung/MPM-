@@ -9,7 +9,7 @@
 
 
 
-由于平带的原因代码与资源进行了分离，需要把资源进行下载后解压到MPM文件下，与study文件夹平级完整项目代码如图所示：
+由于平台的原因，代码与资源进行了分离，需要把资源进行下载后解压到MPM文件下，与study文件夹平级，完整项目代码如图所示：
 
 <img width="526" height="98" alt="image" src="https://github.com/user-attachments/assets/29fb3204-caf7-4968-a9d4-f15f89de4d38" />
 
@@ -31,6 +31,7 @@ python server.py
 http://127.0.0.1:8765
 
 ## 系统展示
+很多细小的功能我懒得写啦，你就自己探索吧，有惊喜哦~
 <img width="1918" height="1006" alt="5dbf19cd5f609da376d914e1e859b7fa" src="https://github.com/user-attachments/assets/bfb0a879-3855-4457-a29a-3a6518ddcf17" />
 <img width="1915" height="983" alt="549606d656fd7ddd1f57ff8c4a7d5bfd" src="https://github.com/user-attachments/assets/198c7364-a79a-47e4-bd80-8d3cfd11d9b2" />
 <img width="1914" height="980" alt="2077e8873d08fc435430b66a55a1ba50" src="https://github.com/user-attachments/assets/75661e0a-35bc-4f86-a16d-4bb0c906ddfd" />
